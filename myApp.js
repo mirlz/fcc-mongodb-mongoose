@@ -1,25 +1,16 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-console.log('ENV: ', process.env.MONGO_URL)
-mongoose.connect(process.env.MONGO_URL , {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-}, (error, client) => {
-  if (error) {
-    return console.log('Unable to connect to database!');
-  }
+const MongoClient = require("mongodb").MongoClient;
+ const client = await new MongoClient(process.env.MONGO_URL,{ 
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 });
-
-mongoose.connection.on('connected', function () {  
-  console.log('Connected to MongoDB');
-}); 
-
-mongoose.connection.on('disconnected', function () {  
-  console.log('Disconnected to MongoDB');
-}); 
+client.connect();
+mongoose.connection.once('open', () => { console.log('MongoDB Connected'); });
+mongoose.connection.on('error', (err) => { console.log('MongoDB connection error: ', err); });
 
 var personSchema = new mongoose.Schema({
   name: { 
