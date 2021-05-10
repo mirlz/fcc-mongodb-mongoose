@@ -1,9 +1,11 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-console.log('ENV: ', process.env.MONGO_URL)
+const uri = process.env.MONGO_URL + '';
+console.log('ENV: ', uri, 'TYPE: ', typeof (uri))
+
 const MongoClient = require("mongodb").MongoClient;
- const client = new MongoClient(process.env.MONGO_URL,{ 
+ const client = new MongoClient(uri,{ 
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
