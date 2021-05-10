@@ -1,12 +1,11 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
+console.log('ENV: ', process.env.MONGO_URL)
 const MongoClient = require("mongodb").MongoClient;
  const client = new MongoClient(process.env.MONGO_URL,{ 
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
 });
 client.connect();
 mongoose.connection.once('open', () => { console.log('MongoDB Connected'); });
