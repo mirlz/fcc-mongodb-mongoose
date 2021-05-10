@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 const MongoClient = require("mongodb").MongoClient;
- const client = await new MongoClient(process.env.MONGO_URL,{ 
+ const client = new MongoClient(process.env.MONGO_URL,{ 
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
