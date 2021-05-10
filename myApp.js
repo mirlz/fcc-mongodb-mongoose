@@ -12,6 +12,14 @@ mongoose.connect(process.env.MONGO_URL , {
   }
 });
 
+mongoose.connection.on('connected', function () {  
+  console.log('Connected to MongoDB');
+}); 
+
+mongoose.connection.on('disconnected', function () {  
+  console.log('Disconnected to MongoDB');
+}); 
+
 var personSchema = new mongoose.Schema({
   name: { 
     type: String,
