@@ -12,10 +12,33 @@ mongoose.connect(process.env.MONGO_URL , {
   }
 });
 
-let Person;
+var personSchema = new mongoose.Schema({
+  name: { 
+    type: String,
+    required: true
+  },
+  age: {
+    type: Number
+  },
+  favoriteFoods: { 
+    type: [String],
+  }
+});
+
+var Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  const user = new Person({
+    name: 'Mirlz',
+    age: 30,
+    favoriteFoods: ['burger', 'nasi lemak', 'pizza']
+  });
+ 
+  user.save((err, data) => {
+    if(err) return console.log(err);
+
+    done(null, data);
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
