@@ -315,7 +315,7 @@ router.post("/remove-one-person", function (req, res, next) {
 
 const removeMany = require("./myApp.js").removeManyPeople;
 router.post("/remove-many-people", function (req, res, next) {
-  Person.remove({}, function (err) {
+  Person.deleteMany({}, function (err) {
     if (err) {
       return next(err);
     }
@@ -336,7 +336,7 @@ router.post("/remove-many-people", function (req, res, next) {
             console.log("Missing `done()` argument");
             return next({ message: "Missing callback argument" });
           }
-          Person.count(function (err, cnt) {
+          Person.countDocuments(function (err, cnt) {
             if (err) {
               return next(err);
             }

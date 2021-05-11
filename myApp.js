@@ -109,7 +109,7 @@ const removeManyPeople = async(done) => {
     const nameToRemove = "Mary";
     const deleted = Person.deleteMany({name: nameToRemove});
 
-    console.log(deleted);
+    console.log('DELETED: ', deleted);
     done(null, deleted);
   } catch (e) {
     done(e, null);
