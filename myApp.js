@@ -109,17 +109,26 @@ const removeManyPeople = async(done) => {
     const nameToRemove = "Mary";
     const deleted = await Person.deleteMany({name: nameToRemove});
 
-    console.log('DELETED: ', deleted);
     done(null, deleted);
   } catch (e) {
     done(e, null);
   }
 };
 
-const queryChain = (done) => {
-  const foodToSearch = "burrito";
+const queryChain = async(done) => {
+  try {
+    const foodToSearch = "burrito";
 
-  done(null /*, data*/);
+    const person = await Person.find({ favoriteFoods: foodToSearch })
+      .sort({name: 1})
+      .limit(2)
+      .select('name favoriteFoods');
+
+    console.log('PERSON: ', person);
+    done(null, person);
+  } catch (e) {
+    done(e, null);
+  }
 };
 
 /** **Well Done !!**
